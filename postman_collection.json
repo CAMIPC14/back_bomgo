@@ -1,0 +1,248 @@
+{
+  "info": {
+    "name": "Fast Food API",
+    "_postman_id": "fast-food-api-collection",
+    "description": "Colección completa para la API REST de Fast Food con PostgreSQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/clientes", "host": ["{{baseUrl}}"], "path": ["clientes"] }
+          }
+        },
+        {
+          "name": "Obtener cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/clientes/1", "host": ["{{baseUrl}}"], "path": ["clientes", "1"] }
+          }
+        },
+        {
+          "name": "Crear cliente",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pedro Sanchez\",\n  \"email\": \"pedro@correo.com\",\n  \"telefono\": \"987654321\",\n  \"direccion\": \"Av. Principal 100\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/clientes", "host": ["{{baseUrl}}"], "path": ["clientes"] }
+          }
+        },
+        {
+          "name": "Actualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pedro Sanchez Editado\",\n  \"email\": \"pedro@correo.com\",\n  \"telefono\": \"987654999\",\n  \"direccion\": \"Av. Principal 200\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/clientes/1", "host": ["{{baseUrl}}"], "path": ["clientes", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/clientes/3", "host": ["{{baseUrl}}"], "path": ["clientes", "3"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categorías",
+      "item": [
+        {
+          "name": "Listar categorías",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categorias", "host": ["{{baseUrl}}"], "path": ["categorias"] }
+          }
+        },
+        {
+          "name": "Obtener categoría por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categorias/1", "host": ["{{baseUrl}}"], "path": ["categorias", "1"] }
+          }
+        },
+        {
+          "name": "Crear categoría",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Postres\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/categorias", "host": ["{{baseUrl}}"], "path": ["categorias"] }
+          }
+        },
+        {
+          "name": "Actualizar categoría",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Dulces y Helados\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/categorias/1", "host": ["{{baseUrl}}"], "path": ["categorias", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar categoría",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categorias/4", "host": ["{{baseUrl}}"], "path": ["categorias", "4"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Listar productos (con categoría)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/productos", "host": ["{{baseUrl}}"], "path": ["productos"] }
+          }
+        },
+        {
+          "name": "Filtrar productos por categoría",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/productos?categoria_id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["productos"],
+              "query": [{ "key": "categoria_id", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Obtener producto por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/productos/1", "host": ["{{baseUrl}}"], "path": ["productos", "1"] }
+          }
+        },
+        {
+          "name": "Crear producto",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoria_id\": 2,\n  \"nombre\": \"Limonada frozen\",\n  \"precio\": 6.50,\n  \"disponible\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/productos", "host": ["{{baseUrl}}"], "path": ["productos"] }
+          }
+        },
+        {
+          "name": "Actualizar producto",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoria_id\": 2,\n  \"nombre\": \"Limonada frozen 1L\",\n  \"precio\": 8.50,\n  \"disponible\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/productos/1", "host": ["{{baseUrl}}"], "path": ["productos", "1"] }
+          }
+        },
+        {
+          "name": "Eliminar producto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/productos/5", "host": ["{{baseUrl}}"], "path": ["productos", "5"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pedidos",
+      "item": [
+        {
+          "name": "Listar pedidos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/pedidos", "host": ["{{baseUrl}}"], "path": ["pedidos"] }
+          }
+        },
+        {
+          "name": "Obtener pedido por ID (con cliente y detalle)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/pedidos/1", "host": ["{{baseUrl}}"], "path": ["pedidos", "1"] }
+          }
+        },
+        {
+          "name": "Crear pedido (Transaccional)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cliente_id\": 1,\n  \"items\": [\n    { \"producto_id\": 1, \"cantidad\": 2 },\n    { \"producto_id\": 3, \"cantidad\": 2 }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/pedidos", "host": ["{{baseUrl}}"], "path": ["pedidos"] }
+          }
+        },
+        {
+          "name": "Cambiar estado del pedido",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"preparando\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/pedidos/1/estado", "host": ["{{baseUrl}}"], "path": ["pedidos", "1", "estado"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reportes",
+      "item": [
+        {
+          "name": "Productos más vendidos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/reportes/mas-vendidos", "host": ["{{baseUrl}}"], "path": ["reportes", "mas-vendidos"] }
+          }
+        }
+      ]
+    }
+  ]
+}
+

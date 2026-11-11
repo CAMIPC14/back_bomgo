@@ -1,0 +1,196 @@
+### ============================================
+### Fast Food API — Ejemplos de peticiones
+### (para VS Code REST Client o IntelliJ HTTP)
+### ============================================
+
+@baseUrl = http://localhost:3000
+
+
+### ─────────── CLIENTES ───────────
+
+### Listar clientes
+GET {{baseUrl}}/clientes
+
+### Obtener cliente por ID
+GET {{baseUrl}}/clientes/1
+
+### Crear cliente
+POST {{baseUrl}}/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Andrea Zubieta",
+  "email": "andrea.nueva@correo.com",
+  "telefono": "999333444",
+  "direccion": "Jr. Lima 456"
+}
+
+### Crear cliente (email duplicado → 409)
+POST {{baseUrl}}/clientes
+Content-Type: application/json
+
+{
+  "nombre": "Andrea Zubieta",
+  "email": "andrea@correo.com",
+  "telefono": "000000000"
+}
+
+### Actualizar cliente
+PUT {{baseUrl}}/clientes/2
+Content-Type: application/json
+
+{
+  "nombre": "Andrea Zubieta",
+  "email": "andrea@correo.com",
+  "telefono": "999333444",
+  "direccion": "Jr. Lima 456"
+}
+
+### Eliminar cliente
+DELETE {{baseUrl}}/clientes/3
+
+
+### ─────────── CATEGORÍAS ───────────
+
+### Listar categorías
+GET {{baseUrl}}/categorias
+
+### Obtener categoría por ID
+GET {{baseUrl}}/categorias/1
+
+### Crear categoría
+POST {{baseUrl}}/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Postres"
+}
+
+### Crear categoría duplicada (→ 409)
+POST {{baseUrl}}/categorias
+Content-Type: application/json
+
+{
+  "nombre": "Bebidas"
+}
+
+### Actualizar categoría
+PUT {{baseUrl}}/categorias/4
+Content-Type: application/json
+
+{
+  "nombre": "Dulces"
+}
+
+### Eliminar categoría
+DELETE {{baseUrl}}/categorias/4
+
+
+### ─────────── PRODUCTOS ───────────
+
+### Listar productos (con nombre de categoría)
+GET {{baseUrl}}/productos
+
+### Filtrar por categoría
+GET {{baseUrl}}/productos?categoria_id=1
+
+### Obtener producto por ID
+GET {{baseUrl}}/productos/1
+
+### Crear producto
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "categoria_id": 2,
+  "nombre": "Jugo de naranja",
+  "precio": 7.50,
+  "disponible": true
+}
+
+### Crear producto con precio inválido (→ 400)
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "categoria_id": 1,
+  "nombre": "Gratis",
+  "precio": -5
+}
+
+### Actualizar producto
+PUT {{baseUrl}}/productos/5
+Content-Type: application/json
+
+{
+  "categoria_id": 2,
+  "nombre": "Jugo de naranja grande",
+  "precio": 9.00,
+  "disponible": true
+}
+
+### Eliminar producto
+DELETE {{baseUrl}}/productos/5
+
+
+### ─────────── PEDIDOS ───────────
+
+### Listar pedidos
+GET {{baseUrl}}/pedidos
+
+### Obtener pedido con detalle
+GET {{baseUrl}}/pedidos/1
+
+### Crear pedido (transaccional)
+POST {{baseUrl}}/pedidos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "items": [
+    { "producto_id": 1, "cantidad": 2 },
+    { "producto_id": 3, "cantidad": 3 },
+    { "producto_id": 4, "cantidad": 1 }
+  ]
+}
+
+### Crear pedido con producto inexistente (→ 400 + rollback)
+POST {{baseUrl}}/pedidos
+Content-Type: application/json
+
+{
+  "cliente_id": 1,
+  "items": [
+    { "producto_id": 999, "cantidad": 1 }
+  ]
+}
+
+### Cambiar estado de pedido
+PATCH {{baseUrl}}/pedidos/1/estado
+Content-Type: application/json
+
+{
+  "estado": "preparando"
+}
+
+### Cambiar estado a entregado
+PATCH {{baseUrl}}/pedidos/1/estado
+Content-Type: application/json
+
+{
+  "estado": "entregado"
+}
+
+### Cambiar estado inválido (→ 400)
+PATCH {{baseUrl}}/pedidos/1/estado
+Content-Type: application/json
+
+{
+  "estado": "volando"
+}
+
+
+### ─────────── REPORTES ───────────
+
+### Productos más vendidos
+GET {{baseUrl}}/reportes/mas-vendidos

@@ -1,0 +1,20 @@
+{
+  "name": "fastfood-api",
+  "version": "1.0.0",
+  "description": "API REST para web de fast food con PostgreSQL",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": ["fastfood", "api", "express", "postgresql"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  }
+}
+
